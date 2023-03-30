@@ -7,7 +7,73 @@ that differs from the body of a document/code file.
 
 You can add further highlight groups (e.g., dap, telescope, gitsigns) at the end
 of the file -- there's an example for MiniJump from nvim-mini; only basic
-plugins are actually configured.
+plugins are actually configured. Note that I use the 'gui' attribute to define
+many default settings. For instance, comments are defined as:
+
+    call s:h('Comment', {'fg': s:comment, 'gui': 'italic'})
+
+which means they should be italicized if you ':set termguicolors'. If your
+terminal emulator doesn't offer an italic variant of your preferred font (e.g.,
+this is the case for Fira Code), you can use a custom font instead. Here is what
+I used with Alacritty (with font ligature patch):
+
+    font:
+      normal:
+        family: Fira Code
+        style: Regular
+      bold:
+        family: Fira Code
+        style: SemiBold
+      italic:
+        family: Fira Code
+        style: Medium
+      size: 11.0
+
+If you are after a good looking color scheme for your terminal, I can recommend
+the base16 variants. I personnally settled on the following palette for my light
+theme: (Alacritty syntax again)
+
+    primary:
+      background: "#fffcf1"
+      foreground: "#2E3440"
+    normal:
+      black: "#fffcf1"
+      red: "#a54242"
+      green: "#8c9440"
+      yellow: "#de935f"
+      blue: "#5f819d"
+      magenta: "#85678f"
+      cyan: "#5e8d87"
+      white: "#3B4252"
+    bright:
+      black: "#afa39e"
+      red: "#cc6666"
+      green: "#b5bd68"
+      yellow: "#f0c674"
+      blue: "#81a2be"
+      magenta: "#b294bb"
+      cyan: "#8abeb7"
+      white: "#4C566A"
+
+For dark theme, I warmly recommend the Nord theme (https://www.nordtheme.com/).
+
+At some point, we were able to auto-detect background color, especially in Tmux,
+but the following Neovim hack (https://github.com/neovim/neovim/issues/17070) no
+longer seems to work, at least with Tmux 3.2a:
+
+    vim.api.nvim_exec(
+      [[
+    if $TERM ==# "tmux-256color"
+      lua vim.loop.fs_write(2, "\27Ptmux;\27\27]11;?\7\27\\", -1, nil)
+    endif
+    ]],
+      true
+    )
+
+This means you have to ':set background=<light|dark>' in your config file if you
+are using Tmux. Otherwise, it should just work, e.g. in Gnome terminal change
+your color theme while running (Neo)vim and update (Neo)vim background
+.
 
 This theme is inspired from the many mono or dichromatic themes listed at
 https://github.com/mcchrish/vim-no-color-collections, among others.
