@@ -6,7 +6,7 @@ structure with bold rather than color. Only comments and strings get a color
 that differs from the body of a document/code file.
 
 You can add further highlight groups (e.g., dap, telescope, gitsigns) at the end
-of the file -- there's an example for MiniJump from nvim-mini; only basic
+of the file -- there's an example for MiniJump from mini.nvim [1]; only basic
 plugins are actually configured. Note that I use the 'gui' attribute to define
 many default settings. For instance, comments are defined as:
 
@@ -55,11 +55,11 @@ theme: (Alacritty syntax again)
       cyan: "#8abeb7"
       white: "#4C566A"
 
-For dark theme, I warmly recommend the Nord theme (https://www.nordtheme.com/).
+For dark theme, I warmly recommend the Nord theme [2].
 
 At some point, we were able to auto-detect background color, especially in Tmux,
-but the following Neovim hack (https://github.com/neovim/neovim/issues/17070) no
-longer seems to work, at least with Tmux 3.2a:
+but the following Neovim hack [3] no longer seems to work, at least with Tmux
+3.2a:
 
     vim.api.nvim_exec(
       [[
@@ -75,8 +75,13 @@ are using Tmux. Otherwise, it should just work, e.g. in Gnome terminal change
 your color theme while running (Neo)vim and update (Neo)vim background
 .
 
-This theme is inspired from the many mono or dichromatic themes listed at
-https://github.com/mcchrish/vim-no-color-collections, among others.
-Unfortunately I don't remember which one I started with.
+This theme is inspired from the many mono or dichromatic themes listed at [4],
+among others. Unfortunately I don't remember which one I started with.
 
-A preview is available here: https://aliquote.org/post/unified-colors-of-tuis/.
+A preview is available at [5].
+
+[1]: https://github.com/echasnovski/mini.nvim
+[2]: https://www.nordtheme.com/
+[3]: https://github.com/neovim/neovim/issues/17070
+[4]: https://github.com/mcchrish/vim-no-color-collections
+[5]: https://aliquote.org/post/unified-colors-of-tuis/.
