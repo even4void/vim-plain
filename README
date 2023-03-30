@@ -1,0 +1,9 @@
+vim-plain
+---------
+
+A (Neo)vim minimalistic color scheme, which emphasizes language and markup
+structure with bold rather than color. Only comments and strings get a color
+that differs from the body of a document/code file.
+
+You can add further highlight groups (e.g., dap, telescope, gitsigns) at the end
+of the file; only basic plugins are actually configured.
