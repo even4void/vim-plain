@@ -6,4 +6,11 @@ structure with bold rather than color. Only comments and strings get a color
 that differs from the body of a document/code file.
 
 You can add further highlight groups (e.g., dap, telescope, gitsigns) at the end
-of the file; only basic plugins are actually configured.
+of the file -- there's an example for MiniJump from nvim-mini; only basic
+plugins are actually configured.
+
+This theme is inspired from the many mono or dichromatic themes listed at
+https://github.com/mcchrish/vim-no-color-collections, among others.
+Unfortunately I don't remember which one I started with.
+
+A preview is available here: https://aliquote.org/post/unified-colors-of-tuis/.
