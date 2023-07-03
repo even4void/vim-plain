@@ -5,6 +5,7 @@ if exists('g:colors_name')
     syntax on
 endif
 
+
 let g:colors_name='plain'
 
 let s:italics = (&t_ZH !=# '' && &t_ZH !=# '[7m') || has('gui_running') || has('nvim')
@@ -50,6 +51,7 @@ if &background ==# 'dark'
   let s:cursor_line      = s:subtle_black
   let s:constant         = s:light_blue
   let s:comment          = s:light_gray
+  " let s:comment          = s:handle
   let s:selection        = s:dark_yellow
   let s:selection_fg     = s:black
   let s:ok               = s:light_green
@@ -67,10 +69,12 @@ else
   let s:green            = s:dark_green
   let s:red              = s:dark_red
   let s:yellow           = s:dark_yellow
+  " let s:visual           = s:light_blue
   let s:visual           = s:lightest_gray
   let s:cursor_line      = s:lightest_gray
   let s:constant         = s:dark_blue
   let s:comment          = s:light_gray
+  " let s:comment          = s:handle
   let s:selection        = s:light_yellow
   let s:selection_fg     = s:light_black
   let s:ok               = s:light_green
@@ -191,9 +195,9 @@ call s:h('DiffText',      {'fg': s:constant})
 
 if has('gui_running')
   call s:h('SpellBad',    {'gui': 'underline', 'sp': s:red})
-  call s:h('SpellCap',    {'gui': 'underline', 'sp': s:ok})
-  call s:h('SpellRare',   {'gui': 'underline', 'sp': s:error})
-  call s:h('SpellLocal',  {'gui': 'underline', 'sp': s:ok})
+  call s:h('SpellCap',    {'gui': 'undercurl', 'sp': s:ok})
+  call s:h('SpellRare',   {'gui': 'undercurl', 'sp': s:error})
+  call s:h('SpellLocal',  {'gui': 'undercurl', 'sp': s:ok})
 else
   call s:h('SpellBad',    {'cterm': 'underline', 'fg': s:red})
   call s:h('SpellCap',    {'cterm': 'underline', 'fg': s:ok})
@@ -221,7 +225,8 @@ hi! link TabLine          Normal
 hi! link TabLineSel       Keyword
 hi! link TabLineFill      Normal
 
-call s:h('CursorLine',    {'cterm': 'NONE'})
+" call s:h('CursorLine',    {'cterm': 'NONE'})
+call s:h('CursorLine',   {'bg': s:cursor_line})
 call s:h('ColorColumn',   {'bg': s:cursor_line})
 
 call s:h('MatchParen',    {'bg': s:bg_subtle, 'fg': s:norm})
@@ -262,11 +267,16 @@ call s:h('DiagnosticError ', {'fg': s:ok})
 call s:h('DiagnosticWarn ', {'fg': s:ok})
 call s:h('DiagnosticInfo ', {'fg': s:ok})
 call s:h('DiagnosticHint ', {'fg': s:ok})
-call s:h('DiagnosticUnderlineError', {'bg': s:err, 'gui': 'NONE'})
+call s:h('DiagnosticUnderlineError', {'bg': s:err, 'fg': s:error, 'gui': 'NONE'})
 call s:h('DiagnosticUnderlineWarn', {'bg': s:warn, 'gui': 'NONE'})
-call s:h('DiagnosticUnderlineInfo', {'gui': 'underline'})
-call s:h('DiagnosticUnderlineHint', {'gui': 'underline'})
+call s:h('DiagnosticUnderlineInfo', {'gui': 'undercurl', 'sp': s:comment})
+call s:h('DiagnosticUnderlineHint', {'gui': 'underline', 'sp': s:comment})
+call s:h('DiagnosticUnnecessary', {'gui': 'underline', 'sp': s:comment})
 hi link LspCodeLens Comment
+hi link DiagnosticFloatingError Normal
+hi link DiagnosticFloatingWarn Normal
+hi link DiagnosticFloatingInfo Normal
+hi link DiagnosticFloatingHint Normal
 hi link LightBulbVirtualText Comment
 
 call s:h('Todo ', {'gui': 'bold', 'cterm': 'bold,underline'})
