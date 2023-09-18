@@ -23,63 +23,45 @@ let s:dark_red        = { 'gui': '#a54242', 'cterm': '1'   }
 let s:light_red       = { 'gui': '#cc6666', 'cterm': '9'   }
 let s:dark_blue       = { 'gui': '#5f819d', 'cterm': '4'   }
 let s:light_blue      = { 'gui': '#81a2be', 'cterm': '12'  }
-let s:dark_cyan       = { 'gui': '#5e8d87', 'cterm': '6'   }
-let s:light_cyan      = { 'gui': '#8abeb7', 'cterm': '14'  }
 let s:dark_green      = { 'gui': '#8c9440', 'cterm': '2'   }
 let s:light_green     = { 'gui': '#b5bd68', 'cterm': '10'  }
-let s:dark_purple     = { 'gui': '#85678f', 'cterm': '5'   }
-let s:light_purple    = { 'gui': '#b294bb', 'cterm': '13'  }
 let s:light_yellow    = { 'gui': '#f0c674', 'cterm': '11'  }
 let s:dark_yellow     = { 'gui': '#de935f', 'cterm': '3'   }
-let s:handle          = { 'gui': '#8888cc', 'cterm': '4'   }
-let s:warn            = { 'gui': '#ffffcc', 'cterm': '11'   }
+let s:warn            = { 'gui': '#ffffcc', 'cterm': '11'  }
 let s:err             = { 'gui': '#ffe6cc', 'cterm': '9'   }
 
 if &background ==# 'dark'
   let s:bg               = s:black
   let s:bg_subtle        = s:light_black
-  let s:bg_very_subtle   = s:subtle_black
+  let s:comment          = s:light_gray
+  let s:constant         = s:light_blue
+  let s:cursor_line      = s:subtle_black
+  let s:green            = s:light_green
   let s:norm             = s:lighter_gray
   let s:norm_subtle      = s:light_gray
   let s:norm_very_subtle = s:medium_gray
-  let s:purple           = s:light_purple
-  let s:cyan             = s:light_cyan
-  let s:green            = s:light_green
+  let s:ok               = s:light_green
   let s:red              = s:light_red
-  let s:yellow           = s:light_yellow
-  let s:visual           = s:lighter_black
-  let s:cursor_line      = s:subtle_black
-  let s:constant         = s:light_blue
-  let s:comment          = s:light_gray
-  " let s:comment          = s:handle
   let s:selection        = s:dark_yellow
   let s:selection_fg     = s:black
-  let s:ok               = s:light_green
+  let s:yellow           = s:light_yellow
   let s:warning          = s:yellow
-  let s:error            = s:light_red
 else
   let s:bg               = s:white
   let s:bg_subtle        = s:lighter_gray
-  let s:bg_very_subtle   = s:light_gray
+  let s:comment          = s:light_gray
+  let s:constant         = s:dark_blue
+  let s:cursor_line      = s:lightest_gray
+  let s:green            = s:dark_green
   let s:norm             = s:light_black
   let s:norm_subtle      = s:lighter_black
   let s:norm_very_subtle = s:medium_gray
-  let s:purple           = s:dark_purple
-  let s:cyan             = s:dark_cyan
-  let s:green            = s:dark_green
+  let s:ok               = s:light_green
   let s:red              = s:dark_red
-  let s:yellow           = s:dark_yellow
-  " let s:visual           = s:light_blue
-  let s:visual           = s:lightest_gray
-  let s:cursor_line      = s:lightest_gray
-  let s:constant         = s:dark_blue
-  let s:comment          = s:light_gray
-  " let s:comment          = s:handle
   let s:selection        = s:light_yellow
   let s:selection_fg     = s:light_black
-  let s:ok               = s:light_green
+  let s:yellow           = s:dark_yellow
   let s:warning          = s:yellow
-  let s:error            = s:dark_red
 endif
 
 unlet s:black
@@ -95,12 +77,8 @@ unlet s:dark_red
 unlet s:light_red
 unlet s:dark_blue
 unlet s:light_blue
-unlet s:dark_cyan
-unlet s:light_cyan
 unlet s:dark_green
 unlet s:light_green
-unlet s:dark_purple
-unlet s:light_purple
 unlet s:light_yellow
 unlet s:dark_yellow
 
@@ -168,7 +146,7 @@ hi! link Label            Statement
 hi! link Keyword          Statement
 hi! link Exception        Statement
 
-call s:h('ErrorMsg',      {'fg': s:error})
+call s:h('ErrorMsg',      {'fg': s:red})
 hi! link Error            ErrorMsg
 hi! link Question         ErrorMsg
 call s:h('WarningMsg',    {'fg': s:warning})
@@ -182,7 +160,6 @@ hi! link qfLineNr         NonText
 call s:h('Search',        {'bg': s:selection, 'fg': s:selection_fg})
 call s:h('IncSearch',     {'bg': s:selection, 'fg': s:selection_fg, 'gui': 'bold'})
 
-" call s:h('Visual',        {'bg': s:visual, 'cterm': 'reverse'})
 call s:h('Visual',        {'bg': s:bg, 'cterm': 'reverse', 'gui': 'reverse'})
 call s:h('VisualNOS',     {'bg': s:bg_subtle})
 
@@ -196,12 +173,12 @@ call s:h('DiffText',      {'fg': s:constant})
 if has('gui_running')
   call s:h('SpellBad',    {'gui': 'underline', 'sp': s:red})
   call s:h('SpellCap',    {'gui': 'undercurl', 'sp': s:ok})
-  call s:h('SpellRare',   {'gui': 'undercurl', 'sp': s:error})
+  call s:h('SpellRare',   {'gui': 'undercurl', 'sp': s:red})
   call s:h('SpellLocal',  {'gui': 'undercurl', 'sp': s:ok})
 else
   call s:h('SpellBad',    {'cterm': 'underline', 'fg': s:red})
   call s:h('SpellCap',    {'cterm': 'underline', 'fg': s:ok})
-  call s:h('SpellRare',   {'cterm': 'underline', 'fg': s:error})
+  call s:h('SpellRare',   {'cterm': 'underline', 'fg': s:red})
   call s:h('SpellLocal',  {'cterm': 'underline', 'fg': s:ok})
 endif
 
@@ -213,7 +190,7 @@ call s:h('StatusLineNC',      {'fg': s:bg_subtle})
 call s:h('WildMenu',          {'gui': 'underline,bold', 'fg': s:norm})
 
 call s:h('StatusLineOk',      {'gui': 'underline', 'fg': s:ok})
-call s:h('StatusLineError',   {'gui': 'underline', 'fg': s:error})
+call s:h('StatusLineError',   {'gui': 'underline', 'fg': s:red})
 call s:h('StatusLineWarning', {'gui': 'underline', 'fg': s:warning})
 
 call s:h('Pmenu',         {'fg': s:norm, 'bg': s:cursor_line})
@@ -267,7 +244,7 @@ call s:h('DiagnosticError ', {'fg': s:ok})
 call s:h('DiagnosticWarn ', {'fg': s:ok})
 call s:h('DiagnosticInfo ', {'fg': s:ok})
 call s:h('DiagnosticHint ', {'fg': s:ok})
-call s:h('DiagnosticUnderlineError', {'bg': s:err, 'fg': s:error, 'gui': 'NONE'})
+call s:h('DiagnosticUnderlineError', {'bg': s:err, 'fg': s:red, 'gui': 'NONE'})
 call s:h('DiagnosticUnderlineWarn', {'bg': s:warn, 'gui': 'NONE'})
 call s:h('DiagnosticUnderlineInfo', {'gui': 'undercurl', 'sp': s:comment})
 call s:h('DiagnosticUnderlineHint', {'gui': 'underline', 'sp': s:comment})
@@ -285,12 +262,12 @@ call s:h('Todo ', {'gui': 'bold', 'cterm': 'bold,underline'})
 hi link gitcommitOverflow WarningMsg
 
 call s:h('healthSuccess', {'fg': s:ok})
-call s:h('healthError',   {'fg': s:error})
+call s:h('healthError',   {'fg': s:red})
 call s:h('healthWarning', {'fg': s:warning})
 
 call s:h('RedrawDebugClear',      {'fg': s:warning})
 call s:h('RedrawDebugComposed',   {'fg': s:ok})
 call s:h('RedrawDebugNormal',     {'cterm': 'NONE'})
-call s:h('RedrawDebugRecompose',  {'fg': s:error})
-call s:h('debugBreakpoint',       {'fg': s:error})
+call s:h('RedrawDebugRecompose',  {'fg': s:red})
+call s:h('debugBreakpoint',       {'fg': s:red})
 call s:h('debugPC',               {'cterm': 'NONE'})
