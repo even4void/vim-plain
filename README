@@ -58,8 +58,8 @@ theme: (Alacritty syntax again)
 For dark theme, I warmly recommend the Nord theme [2].
 
 At some point, we were able to auto-detect background color, especially in Tmux,
-but the following Neovim hack [3] no longer seems to work, at least with Tmux
-3.2a:
+but the following Neovim hack [3] may no longer work depending on your terminal
+settings. At least it seems to still work with Tmux 3.2a:
 
     vim.api.nvim_exec(
       [[
@@ -70,18 +70,65 @@ but the following Neovim hack [3] no longer seems to work, at least with Tmux
       true
     )
 
-This means you have to ':set background=<light|dark>' in your config file if you
-are using Tmux. Otherwise, it should just work, e.g. in Gnome terminal change
-your color theme while running (Neo)vim and update (Neo)vim background
-.
+If this doesn't work, you will have to ':set background=<light|dark>' in your
+config file when using Tmux. Otherwise, it should just work, e.g. in Gnome
+terminal change your color theme while running (Neo)vim and update (Neo)vim
+background.
 
 This theme is inspired from the many mono or dichromatic themes listed at [4],
 among others. Unfortunately I don't remember which one I started with.
 
 A preview is available at [5].
 
+For an even simpler colorscheme, have a look at mono.vim [6].
+
+
+Side note
+---------
+
+If you are using Helix [7] instead, a close looking colorscheme is provided
+below:
+
+  "ui.text" = "black"
+  "ui.selection" = {bg="selected"}
+  "ui.cursorline" = {bg="acme_bar_bg"}
+  "ui.statusline" = {fg="black", bg="acme_bg"}
+  "ui.statusline.inactive" = {fg="black", bg="acme_bg2"}
+  "ui.virtual" = "indent"
+  "ui.virtual.ruler" = { bg = "acme_bar_bg" }
+  "ui.cursor.match" = {bg="acme_bar_bg"}
+  "ui.cursor" = {bg="cursor", fg="white"}
+  "string" = "red"
+  "comment" = "green"
+  "ui.help" = {fg="black", bg="acme_bg"}
+  "ui.popup" = {fg="black", bg="acme_bg"}
+  "ui.menu" = {fg="black", bg="acme_bg"}
+  "ui.menu.selected" = {bg="selected"}
+  "ui.window" = {bg="acme_bg"}
+  "diagnostic.error" = {bg="white", modifiers=["bold"]}
+  "diagnostic.warning" = {bg="white", modifiers=["bold"]}
+  "diagnostic.hint" = {bg="white", modifiers=["bold"]}
+  "ui.bufferline" = { fg = "indent", bg = "acme_bar_bg" }
+  "ui.bufferline.active" = { fg = "black", bg = "acme_bg" }
+
+  [palette]
+  white = "#ffffff"
+  acme_bg = "#ffffea"
+  acme_bg2 = "#fffcf1"
+  black = "#000000"
+  selected = "#eeee9e"
+  acme_bar_bg = "#aeeeee"
+  acme_bar_inactive = "#eaffff"
+  cursor = "#444444"
+  red = "#a0342f"
+  green = "#065905"
+  indent = "#aaaaaa"
+
+
 [1]: https://github.com/echasnovski/mini.nvim
-[2]: https://www.nordtheme.com/
+[2]: https://www.nordtheme.com
 [3]: https://github.com/neovim/neovim/issues/17070
 [4]: https://github.com/mcchrish/vim-no-color-collections
-[5]: https://aliquote.org/post/unified-colors-of-tuis/.
+[5]: https://aliquote.org/post/unified-colors-of-tuis
+[6]: https://github.com/even4void/vim-plain/blob/master/mono.vim
+[7]: https://helix-editor.com
